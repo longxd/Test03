@@ -20,6 +20,7 @@
 
 {% block main %}
 <form action="" method="POST">
+    {% csrf_token %}
     <div class="main-auth-group">
         <div class="top-group">
             <span class="title">请登录</span>
