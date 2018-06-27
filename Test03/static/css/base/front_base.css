@@ -1,0 +1,194 @@
+*{
+    margin: 0;
+    padding: 0;
+    /*li标签没有小圆点*/
+    list-style: none;
+}
+
+/*鼠标移过去链接没有横线*/
+a:hover{
+    text-decoration: none!important;
+}
+/*------------------------------首页导航条------------------------------*/
+.header{
+    width:100%;
+    height: 65px;
+    background: #3a3a3a;
+}
+
+body{
+    background: gainsboro;
+}
+
+
+.nav{
+    width: 1170px;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    line-height: 65px;
+}
+
+.nav .logo-box{
+    width: 145px;
+    height: 49px;
+    background: url("https://www.xfz.cn/static/build/images/logo.png");
+    margin-top: 10px;
+    float: left;
+}
+
+.nav .menu{
+    float: left;
+    margin-left: 42px;
+}
+
+.menu li{
+    float: left;
+    margin-right:42px;
+    list-style: none;
+    box-sizing: border-box;
+    height: 65px;
+}
+
+.menu li.active{
+    border-bottom:4px solid #e63929;
+}
+
+.menu li a{
+    color:#ffffff;
+}
+
+.auth-group{
+    float: right;
+
+    margin-right: 20px;
+}
+
+.auth-group a{
+    color:#ffffff;
+}
+
+.auth-group .user-icon{
+    color: #fff;
+    font-size: 25px;
+}
+/*------------------------------首页导航条------------------------------*/
+
+/*------------------------------底部footer部分样式------------------------------*/
+
+.footer{
+    width: 100%;
+    margin-top: 40px;
+    color: #c9c9c9;
+    font-size: 14px;
+}
+
+.footer .footer-1{
+    width: 100%;
+    height: 100px;
+    background: #555e68;
+}
+
+.footer-1 .footer-inner{
+    width: 1170px;
+    margin: 0 auto;
+    overflow: hidden;
+    color: #c9c9c9;
+    font-size: 14px;
+}
+
+.footer-inner .logo-box{
+    width: 168px;
+    height: 50px;
+    background: url("https://www.bufanbiz.com/static/build/images/new-logo-footer.png");
+    background-size: 100%;
+    margin-top: 20px;
+    float: left;
+
+}
+
+
+.footer-inner .detail-info-group{
+    float: left;
+    margin-left: 80px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.detail-info-group .top-group{
+    /*background: #ccc;*/
+    overflow: hidden;
+}
+
+.top-group .links{
+    overflow: hidden;
+    float: left;
+}
+
+.links li{
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-right: 1px solid #c9c9c9;
+}
+
+.links li:last-of-type{
+    border-right: none;
+}
+
+.links li a{
+    color: #c9c9c9;
+    font-size: 14px;
+}
+
+.detail-info-group .about-us{
+    float: left;
+    margin-left: 52px;
+}
+
+.about-us .weixin{
+    padding-left: 25px;
+    background-image: url("https://www.bufanbiz.com/static/build/images/wx-icon.png");
+    background-repeat: no-repeat;
+    background-size: 25%;
+}
+
+.about-us .weibo{
+    margin-left:20px;
+    padding-left:25px;
+    background-image: url("https://www.bufanbiz.com/static/build/images/xl-icon.png");
+    background-repeat: no-repeat;
+    background-size: 17%;
+}
+
+
+.detail-info-group .bottom-group{
+    overflow: hidden;
+    /*background: red;*/
+}
+
+.bottom-group .address{
+    float:left;
+    padding-left: 10px;
+}
+
+.bottom-group .contact{
+    float: left;
+    margin-left: 40px;
+}
+
+.footer .footer-2{
+    width: 100%;
+    height: 58px;
+    background: #383e44;
+    text-align: center;
+    color: #c9c9c9;
+    font-size: 14px;
+    line-height: 60px;
+}
+
+
+
+
+
+/*------------------------------底部footer部分样式------------------------------*/

@@ -1,0 +1,47 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#</body>#}
+{#</html>#}
+{% extends 'base/front_base.html' %}
+
+{% block title %}
+    登录页面
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/auth/login.css' %}">
+{% endblock %}
+
+{% block main %}
+<form action="" method="POST">
+    <div class="main-auth-group">
+        <div class="top-group">
+            <span class="title">请登录</span>
+            <a href="#" class="more-link">请注册</a>
+        </div>
+        <div class="from-group">
+            <div class="input-group">
+                <input type="text" class="from-control" name="telephone" placeholder="请输入手机号码">
+            </div>
+            <div class="input-group">
+                <input type="password" class="from-control" name="password" placeholder="请输入密码">
+            </div>
+            <div class="input-group">
+                <label for="">
+                    <input type="checkbox" name="remember" value="1">记住我
+                </label>
+                <a href="#" class="forget-pwd">忘记密码？</a>
+            </div>
+            <div class="input-group">
+                <button class="submi-btn">登录</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
