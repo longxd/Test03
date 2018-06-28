@@ -66,7 +66,6 @@ class UserManager(BaseUserManager):
         return self._create_user(telephone,username,password,**kwargs)
 
 
-
 class User(AbstractBaseUser,PermissionsMixin):
     telephone = models.CharField(max_length=11,unique=True)
     username = models.CharField(max_length=100)
