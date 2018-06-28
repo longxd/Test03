@@ -48,6 +48,7 @@ from django.views.generic import View
 from .forms import LoginForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
+from django.contrib import messages
 
 
 class LoginView(View):
@@ -73,10 +74,13 @@ class LoginView(View):
                 # 如果登录成功，让他跳转到首页
                 return redirect(reverse('news:index'))
             else:
-                return HttpResponse('不知道哪里错误1')
-                 # return redirect(reverse('xfzauth:login'))
-
-
+                messages.info(request, '用户名或密码错误')
+                return redirect(reverse('xfzauth:login'))
         else:
-            return HttpResponse('不知道哪里错误2')
-            # return redirect(reverse('xfzauth:login'))
+            messages.info(request, '表单失败！')
+            return redirect(reverse('xfzauth:login'))
+
+
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'auth/register.html')

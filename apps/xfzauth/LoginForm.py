@@ -10,4 +10,4 @@ class LoginForm(forms.Form):
     password = forms.CharField(min_length=6, max_length=20, error_messages={
         'required': '必须输入密码', 'min_length': '密码最少为6位', 'max_length': '密码最多不能多于20位'
     })
-    remeber = forms.IntegerField(required=False)
+    remember = forms.IntegerField(required=False)
