@@ -44,7 +44,8 @@
 #
 #     def get_short_name(self):
 #         return self.username
-#encoding: utf-8
+
+# encoding: utf-8
 
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 from django.db import models
