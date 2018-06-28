@@ -49,6 +49,8 @@ from .forms import LoginForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.contrib import messages
+from utils.captcha.hycaptcha import Captcha
+from io import BytesIO
 
 
 class LoginView(View):
@@ -84,3 +86,19 @@ class LoginView(View):
 class RegisterView(View):
     def get(self, request):
         return render(request, 'auth/register.html')
+
+
+def img_captcha(request):
+    text, image = Captcha.gene_code()
+    #  image不是一个HttpResponse可以识别的对象
+    #  因此先要将image变成一个数据流才能放到HttpResponse上
+    out = BytesIO()
+    # ByteIO: 相当于一个管道，可以用来存储字节流
+    image.save(out, 'png')
+    out.seek(0)
+    # 将文件指针设置到0的位置
+
+    response = HttpResponse(content_type='image/png')
+    response.write(out.read())
+    response['Content-length'] = out.tell()
+    return response
