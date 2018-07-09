@@ -51,7 +51,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from utils.captcha.hycaptcha import Captcha
 from io import BytesIO
-
+from utils.aliyunsdk import aliyun
 
 class LoginView(View):
     def get(self, request):
@@ -102,3 +102,20 @@ def img_captcha(request):
     response.write(out.read())
     response['Content-length'] = out.tell()
     return response
+
+
+def sms_captcha(request):
+    # 第一版，固定手机号号码的验证
+    # code = Captcha.gene_text()
+    # result = aliyun.send_sms('13585546217', code=code)
+    # print(result)
+    # return HttpResponse('success')
+
+    # 第二版，自动获取手机号，然后发送验证码
+    code = Captcha.gene_text()
+    # /account/sms_captcha/?telephone=13545678900
+    telephone = request.GET.get('telephone')
+    result = aliyun.send_sms(telephone, code=code)
+    print('这是验证码:%s' % code)
+    print('这是电话:%s' % telephone)
+    return HttpResponse('success')
