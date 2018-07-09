@@ -12,6 +12,7 @@ $(function () {
 $(function () {
     var smsCaptcha = $('.sms-captcha-btn');
     function send_sms() {
+        //获取手机号码的时候，获取的时手机号码，而不是手机号码的输入框。[ 之前后面没有 .val() ]
         var telephone = $('input[name="telephone"]').val();
         console.log('coming...');
         $.get({

@@ -1,57 +1,17 @@
-# # encoding: utf-8
-#
-# from django.shortcuts import render
-#
-# # Create your views here.
-#
-# from django.shortcuts import render, redirect, reverse
-# from django.views.generic import View
-# from .forms import LoginForm
-# from django.contrib.auth import authenticate, login
-#
-#
-# # def login_view(request):
-# #     if request.method == 'GET':
-# #         return render(request, 'auth/login.html')
-#
-# # 用类
-#
-# class LoginView(View):
-#     def get(self, request):
-#         return render(request, 'auth/login.html')
-#
-#     def post(self, request):
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             telephone = form.cleaned_data.get('telephone')
-#             password = form.cleaned_data.get('password')
-#             remember = form.cleaned_data.get('remember')
-#             user = authenticate(request, username=telephone, password=password)
-#             if user:
-#                 login(request, user)
-#                 if remember:
-#                     request.session.set_expiry(None)
-#                 else:
-#                     request.session.set_expiry(0)
-#                 #  成功之后跳转到首页
-#                 return redirect(reverse('news:index'))
-#             else:
-#                 return redirect(reverse('xfzauth:login'))
-#
-#         else:
-#             return redirect(reverse('xfzauth:login'))
-
-#encoding: utf-8
+# encoding: utf-8
 
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import View
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.contrib import messages
 from utils.captcha.hycaptcha import Captcha
 from io import BytesIO
 from utils.aliyunsdk import aliyun
+from .models import User
+from django.forms.utils import ErrorDict
+
 
 class LoginView(View):
     def get(self, request):
@@ -87,6 +47,22 @@ class RegisterView(View):
     def get(self, request):
         return render(request, 'auth/register.html')
 
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        if form.is_valid() and form.validate_data(request):
+            telephone = form.cleaned_data.get('telephone')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = User.objects.create_user(telephone=telephone, username=username, password=password)
+            login(request, user)
+            return redirect(reverse('news:index'))
+        else:
+            print(type(form.errors))
+            print(form.errors.get_json_data())
+            # {'telephone': [{'message': '手机号码个数必须为11位！'}]}
+
+            return redirect(reverse('xfzauth:register'))
+
 
 def img_captcha(request):
     text, image = Captcha.gene_code()
@@ -101,6 +77,10 @@ def img_captcha(request):
     response = HttpResponse(content_type='image/png')
     response.write(out.read())
     response['Content-length'] = out.tell()
+
+    # 把图形验证码保存在session,也可以使用memcached
+    request.session['img_captcha'] = text
+
     return response
 
 
@@ -115,6 +95,8 @@ def sms_captcha(request):
     code = Captcha.gene_text()
     # /account/sms_captcha/?telephone=13545678900
     telephone = request.GET.get('telephone')
+    # 把短信验证码保存在session中，也可以使用memcached
+    request.session['sms_captcha'] = sms_captcha
     result = aliyun.send_sms(telephone, code=code)
     print('这是验证码:%s' % code)
     print('这是电话:%s' % telephone)
