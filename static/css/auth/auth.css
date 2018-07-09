@@ -76,6 +76,12 @@
 }
 
 
+.main-auth-group .input-group .disabled{
+    color: #ccc;
+    border: 1px solid #ccc;
+}
+
+
 .main-auth-group .submi-btn{
     width: 100%;
     height: 40px;
