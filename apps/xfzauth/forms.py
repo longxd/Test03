@@ -15,10 +15,12 @@ class LoginForm(forms.Form, FormMixin):
     remember = forms.IntegerField(required=False)
 
 
-class RegisterForm(forms.Form):
+class RegisterForm(forms.Form, FormMixin):
     telephone = forms.CharField(max_length=11, min_length=11, error_messages=
     {"required": "必须收入手机号码！", 'min_length': "手机号码个数必须为11位！", 'max_length': '手机号码个数必须为11位！'})
-    username = forms.CharField(max_length=20, min_length=3)
+    username = forms.CharField(max_length=20, min_length=3, error_messages={"required": "必须输入用户名！",
+                                                                            'min_length': "用户名最少不能少于3个字符！",
+                                                                            'max_length': "用户名最多不能超过20个字符！"})
     img_captcha = forms.CharField(max_length=4, min_length=4)
     password1 = forms.CharField(min_length=6, max_length=20, error_messages=
     {"required": "必须输入密码！", 'min_length': "密码最少不能少于6位！", 'max_length': "密码最多不能多于20位！"})
@@ -26,7 +28,7 @@ class RegisterForm(forms.Form):
     {"required": "必须输入密码！", 'min_length': "密码最少不能少于6位！", 'max_length': "密码最多不能多于20位！"})
     sms_captcha = forms.CharField(max_length=4, min_length=4)
 
-    def validate_data(self,  request):
+    def validate_data(self, request):
         cleaned_data = self.cleaned_data
         password1 = cleaned_data.get('password1')
         password2 = cleaned_data.get('password2')

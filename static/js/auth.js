@@ -43,3 +43,35 @@ $(function () {
     }
     smsCaptcha.click(send_sms);
 });
+
+
+//注册功能。视图函数的注释：ajax请求版本的注册代码
+$(function () {
+    var telephoneInput = $("input[name='telephone']");
+    var usernameInput = $("input[name='username']");
+    var imgCaptchaInput = $("input[name='img_captcha']");
+    var password1Input = $("input[name='password1']");
+    var password2Input = $("input[name='password2']");
+    var smsCaptchaInput = $("input[name='sms_captcha']");
+    var submitBtn = $(".submit-btn");
+
+    submitBtn.click(function (event) {
+        //禁止掉传统的表单发送数据的方式
+        event.preventDefault();
+
+        var telephone = telephoneInput.val();
+        var username = usernameInput.val();
+        var imgCaptcha = imgCaptchaInput.val();
+        var password1 = password1Input.val();
+        var password2 = password2Input.val();
+        var smsCaptcha = smsCaptchaInput.val();
+
+        if(!telephone||telephone.length !=11){
+            alert('手机号码输入不正确！');
+            return;
+        }
+
+    });
+
+
+});

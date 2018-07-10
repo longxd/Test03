@@ -69,7 +69,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser,PermissionsMixin):
     telephone = models.CharField(max_length=11,unique=True)
     username = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, null=True)
     is_active = models.BooleanField(default=True)
     gender = models.IntegerField(default=0) # 0:代表未知，1：男，2：女
     date_joined = models.DateTimeField(auto_now_add=True)

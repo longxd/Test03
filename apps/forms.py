@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+
 class FormMixin(object):
     def get_error(self):
         if hasattr(self, 'errors'):
