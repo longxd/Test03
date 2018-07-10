@@ -71,6 +71,23 @@ $(function () {
             return;
         }
 
+        xfzajax.post({
+            'url': '/account/register/',
+            'data':{
+                'telephone': telephone,
+                'username': username,
+                'img_captcha':imgCaptcha,
+                'password1': password1,
+                'password2': password2,
+                'sms_captcha': smsCaptcha
+            },
+            'success':function (result) {
+                console.log(result);
+            },
+            'fail': function (error) {
+                console.log(error);
+            },
+        });
     });
 
 

@@ -75,7 +75,6 @@ class RegisterView(View):
         return HttpResponse('success')
 
 
-
 def img_captcha(request):
     text, image = Captcha.gene_code()
     #  image不是一个HttpResponse可以识别的对象
