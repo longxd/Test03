@@ -10,7 +10,7 @@ from utils.captcha.hycaptcha import Captcha
 from io import BytesIO
 from utils.aliyunsdk import aliyun
 from .models import User
-from django.forms.utils import ErrorDict
+from utils import restful
 
 
 class LoginView(View):
@@ -72,7 +72,17 @@ class RegisterView(View):
 
     def post(self, request):
         form = RegisterForm(request.POST)
-        return HttpResponse('success')
+        if form.is_valid() and form.validate_data(request):
+            # 先验证数据是否合法
+            telephone = form.cleaned_data.get('telephone')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = User.objects.create_user(telephone=telephone, username=username, password=password)
+            login(request, user)
+            return restful.ok()
+        else:
+            message = form.get_error()
+            return restful.params_error(message=message)
 
 
 def img_captcha(request):
@@ -109,6 +119,6 @@ def sms_captcha(request):
     # 把短信验证码保存在session中，也可以使用memcached
     request.session['sms_captcha'] = code
     result = aliyun.send_sms(telephone, code=code)
-    print('这是验证码:%s' % code)
-    print('这是电话:%s' % telephone)
+    print('这是xfzzuth/views里面的短信验证码: %s' % code)
+    print('这是xfzzuth/views里面的电话: %s' % telephone)
     return HttpResponse('success')

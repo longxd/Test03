@@ -82,7 +82,13 @@ $(function () {
                 'sms_captcha': smsCaptcha
             },
             'success':function (result) {
-                console.log(result);
+                // console.log(result);
+                if(result['code'] === 200){
+                    window.location = '/';
+                }else{
+                    var message = result['message'];
+                    window.messageBox.showError(message);
+                }
             },
             'fail': function (error) {
                 console.log(error);
